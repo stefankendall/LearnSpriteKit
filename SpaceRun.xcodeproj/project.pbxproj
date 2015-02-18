@@ -9,8 +9,12 @@
 /* Begin PBXBuildFile section */
 		545900055382F37C2D730975 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 545901D4620172CBAB7D9BBC /* Main.storyboard */; };
 		5459003E7E47A205C0DEFA4A /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 545901213C944BDBC8F4C89E /* GameScene.m */; };
+		545900F3698E71AE85FC5BE5 /* shipExplode.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 545901DAF5F180E294F1F356 /* shipExplode.m4a */; };
 		5459046C902E5DE3CD573680 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 54590FFCDE166BA6C1C777F6 /* main.m */; };
 		5459055CE422D7FD8A1F19A2 /* asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 54590CF0E5F501BF608B0768 /* asteroid.png */; };
+		545907D5FA430E974606FA11 /* powerup.png in Resources */ = {isa = PBXBuildFile; fileRef = 5459029D6FF71AA31E74252E /* powerup.png */; };
+		5459094F499E15D95F297D6E /* obstacleExplode.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 54590C281F147476BF5D8622 /* obstacleExplode.m4a */; };
+		545909786EAFB0B8D20C8F09 /* shoot.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 54590155A123A2B59C3B31AD /* shoot.m4a */; };
 		545909B502778D1C41EAAA49 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 545906461A4A0418411C6576 /* LaunchScreen.xib */; };
 		54590B55E5FDA68B7E32ADA2 /* SpaceRunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54590F33BD4E5627BC3B53AC /* SpaceRunTests.m */; };
 		54590B68EFEE6186E6069057 /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = 54590416403065CD8AFD9CE9 /* enemy.png */; };
@@ -33,7 +37,10 @@
 
 /* Begin PBXFileReference section */
 		545901213C944BDBC8F4C89E /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		54590155A123A2B59C3B31AD /* shoot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file.m4a; path = shoot.m4a; sourceTree = "<group>"; };
 		5459019949F7AC1BE03EEA6D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		545901DAF5F180E294F1F356 /* shipExplode.m4a */ = {isa = PBXFileReference; lastKnownFileType = file.m4a; path = shipExplode.m4a; sourceTree = "<group>"; };
+		5459029D6FF71AA31E74252E /* powerup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = powerup.png; sourceTree = "<group>"; };
 		54590416403065CD8AFD9CE9 /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
 		54590535B69EB844A44DFBAB /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		5459053E09779C4D59C91E04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
@@ -42,6 +49,7 @@
 		54590787981DE4174BB1F23A /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		54590860540BD591DA6FA9E0 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		54590AF16C40BC418CE451A1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		54590C281F147476BF5D8622 /* obstacleExplode.m4a */ = {isa = PBXFileReference; lastKnownFileType = file.m4a; path = obstacleExplode.m4a; sourceTree = "<group>"; };
 		54590CA4FDCA2CFED334C072 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		54590CF0E5F501BF608B0768 /* asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroid.png; sourceTree = "<group>"; };
 		54590DFFBC7BDEA244A32452 /* SpaceRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +132,10 @@
 				545906387B6F50D8A467AF46 /* photon.png */,
 				54590CF0E5F501BF608B0768 /* asteroid.png */,
 				54590416403065CD8AFD9CE9 /* enemy.png */,
+				54590155A123A2B59C3B31AD /* shoot.m4a */,
+				54590C281F147476BF5D8622 /* obstacleExplode.m4a */,
+				545901DAF5F180E294F1F356 /* shipExplode.m4a */,
+				5459029D6FF71AA31E74252E /* powerup.png */,
 			);
 			path = SpaceRun;
 			sourceTree = "<group>";
@@ -224,6 +236,10 @@
 				54590F95E8F7A89322ACBCEE /* photon.png in Resources */,
 				5459055CE422D7FD8A1F19A2 /* asteroid.png in Resources */,
 				54590B68EFEE6186E6069057 /* enemy.png in Resources */,
+				545909786EAFB0B8D20C8F09 /* shoot.m4a in Resources */,
+				5459094F499E15D95F297D6E /* obstacleExplode.m4a in Resources */,
+				545900F3698E71AE85FC5BE5 /* shipExplode.m4a in Resources */,
+				545907D5FA430E974606FA11 /* powerup.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
