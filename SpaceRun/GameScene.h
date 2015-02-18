@@ -5,5 +5,6 @@
 
 @property(nonatomic, weak) UITouch *shipTouch;
 @property (nonatomic) CFTimeInterval lastUpdateTime;
+@property (nonatomic) CFTimeInterval lastShotFireTime;
 
 @end
