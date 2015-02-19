@@ -12,4 +12,8 @@
 @property (nonatomic, strong) SKAction *shipExplodeSound;
 @property (nonatomic, strong) SKAction *obstacleExplodeSound;
 
+@property (nonatomic, strong) SKEmitterNode *shipExplodeTemplate;
+@property (nonatomic, strong) SKEmitterNode *obstacleExplodeTemplate;
+
+
 @end

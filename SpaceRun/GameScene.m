@@ -1,5 +1,7 @@
 #import <stdlib.h>
 #import "GameScene.h"
+#import "StarField.h"
+#import "SKEmitterNode+RCWExtensions.h"
 
 @implementation GameScene
 
@@ -11,11 +13,21 @@
     ship.position = CGPointMake(self.size.width / 2, self.size.height / 2);
     [self addChild:ship];
 
+    SKEmitterNode *thrust = [SKEmitterNode rcw_nodeWithFile:@"thrust.sks"];
+    thrust.position = CGPointMake(0, -20);
+    [ship addChild:thrust];
+
+    self.shipExplodeTemplate = [SKEmitterNode rcw_nodeWithFile:@"shipExplode.sks"];
+    self.obstacleExplodeTemplate = [SKEmitterNode rcw_nodeWithFile:@"obstacleExplode.sks"];
+
     self.shipFireRate = 0.5;
 
     self.shootSound = [SKAction playSoundFileNamed:@"shoot.m4a" waitForCompletion:NO];
     self.obstacleExplodeSound = [SKAction playSoundFileNamed:@"obstacleExplode.m4a" waitForCompletion:NO];
     self.shipExplodeSound = [SKAction playSoundFileNamed:@"shipExplode.m4a" waitForCompletion:NO];
+
+    StarField *starField = [StarField node];
+    [self addChild:starField];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -69,6 +81,11 @@
             [ship removeFromParent];
             [obstacle removeFromParent];
             [self runAction:self.shipExplodeSound];
+
+            SKEmitterNode *explosion = [self.shipExplodeTemplate copy];
+            explosion.position = ship.position;
+            [explosion rcw_dieOutInDuration:0.3];
+            [self addChild:explosion];
         }
 
         [self enumerateChildNodesWithName:@"photon" usingBlock:^(SKNode *photon, BOOL *stop) {
@@ -76,6 +93,12 @@
                 [photon removeFromParent];
                 [obstacle removeFromParent];
                 [self runAction:self.obstacleExplodeSound];
+
+                SKEmitterNode *explosion = [self.obstacleExplodeTemplate copy];
+                explosion.position = obstacle.position;
+                [explosion rcw_dieOutInDuration:0.1];
+                [self addChild:explosion];
+
                 *stop = YES;
             }
         }];
@@ -84,7 +107,7 @@
 
 - (void)dropThing {
     u_int32_t dice = arc4random_uniform(100);
-    if (dice < 50) {
+    if (dice < 5) {
         [self dropPowerUp];
     }
     else if (dice < 20) {
