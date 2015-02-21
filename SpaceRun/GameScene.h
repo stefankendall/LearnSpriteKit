@@ -15,5 +15,6 @@
 @property (nonatomic, strong) SKEmitterNode *shipExplodeTemplate;
 @property (nonatomic, strong) SKEmitterNode *obstacleExplodeTemplate;
 
+@property (nonatomic, copy) dispatch_block_t endGameCallback;
 
 @end

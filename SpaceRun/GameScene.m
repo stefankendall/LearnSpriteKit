@@ -86,6 +86,8 @@
             explosion.position = ship.position;
             [explosion rcw_dieOutInDuration:0.3];
             [self addChild:explosion];
+
+            [self endGame];
         }
 
         [self enumerateChildNodesWithName:@"photon" usingBlock:^(SKNode *photon, BOOL *stop) {
@@ -103,6 +105,10 @@
             }
         }];
     }];
+}
+
+- (void)endGame {
+    self.endGameCallback();
 }
 
 - (void)dropThing {
