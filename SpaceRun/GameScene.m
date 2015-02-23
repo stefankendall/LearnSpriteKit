@@ -49,7 +49,8 @@
         }
     }
 
-    if (arc4random_uniform(1000) <= 15) {
+    int thingProbability = self.easyMode ? 15 : 50;
+    if (arc4random_uniform(1000) <= thingProbability) {
         [self dropThing];
     }
 

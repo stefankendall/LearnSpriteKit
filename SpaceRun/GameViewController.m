@@ -1,6 +1,6 @@
-
 #import "GameViewController.h"
 #import "GameScene.h"
+#import "OpeningScene.h"
 
 @implementation SKScene (Unarchive)
 
@@ -15,7 +15,7 @@
     [arch setClass:self forClassName:@"SKScene"];
     SKScene *scene = [arch decodeObjectForKey:NSKeyedArchiveRootObjectKey];
     [arch finishDecoding];
-    
+
     return scene;
 }
 
@@ -23,32 +23,47 @@
 
 @implementation GameViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     // Configure the view.
-    SKView * skView = (SKView *)self.view;
+    SKView *skView = (SKView *) self.view;
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
     /* Sprite Kit applies additional optimizations to improve rendering performance */
     skView.ignoresSiblingOrder = YES;
-    
-    // Create and configure the scene.
-    GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    // Present the scene.
-    [skView presentScene:scene];
+
+    SKScene *blackScene = [[SKScene alloc] initWithSize:skView.bounds.size];
+    blackScene.backgroundColor = [SKColor blackColor];
+    [skView presentScene:blackScene];
 }
 
-- (BOOL)shouldAutorotate
-{
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    SKView *skView = (SKView *) self.view;
+    OpeningScene *scene = [OpeningScene sceneWithSize:skView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    SKTransition *transition = [SKTransition fadeWithDuration:1];
+    [skView presentScene:scene transition:transition];
+
+    __weak GameViewController *weakSelf = self;
+    scene.sceneEndCallback = ^{
+        GameScene *scene = [[GameScene alloc] initWithSize:skView.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        scene.easyMode = weakSelf.easyMode;
+        scene.endGameCallback = ^{
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        };
+        SKTransition *transition = [SKTransition fadeWithColor:[SKColor blackColor] duration:1];
+        [skView presentScene:scene transition:transition];
+    };
+}
+
+- (BOOL)shouldAutorotate {
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
-{
+- (NSUInteger)supportedInterfaceOrientations {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
     } else {
@@ -56,10 +71,8 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (BOOL)prefersStatusBarHidden {
