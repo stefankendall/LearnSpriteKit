@@ -7,5 +7,6 @@
 
 @property(nonatomic, strong) UIView *slantedView;
 @property(nonatomic, strong) UITextView *textView;
+@property(nonatomic, strong) UITapGestureRecognizer *tapGesture;
 
 @end

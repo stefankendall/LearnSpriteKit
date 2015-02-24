@@ -2,6 +2,7 @@
 #import "GameScene.h"
 #import "StarField.h"
 #import "SKEmitterNode+RCWExtensions.h"
+#import "GameOverNode.h"
 
 @implementation GameScene
 
@@ -28,6 +29,12 @@
 
     StarField *starField = [StarField node];
     [self addChild:starField];
+}
+
+- (void)willMoveFromView:(SKView *)view {
+    [super willMoveFromView:view];
+    [self.view removeGestureRecognizer:self.tapGesture];
+    self.tapGesture = nil;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -109,6 +116,14 @@
 }
 
 - (void)endGame {
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
+    [self.view addGestureRecognizer:self.tapGesture];
+    GameOverNode *node = [GameOverNode node];
+    node.position = CGPointMake(self.size.width / 2, self.size.height / 2);
+    [self addChild:node];
+}
+
+- (void)tapped {
     self.endGameCallback();
 }
 

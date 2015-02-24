@@ -15,6 +15,8 @@
 @property (nonatomic, strong) SKEmitterNode *shipExplodeTemplate;
 @property (nonatomic, strong) SKEmitterNode *obstacleExplodeTemplate;
 
+@property(nonatomic, strong) UITapGestureRecognizer *tapGesture;
+
 @property (nonatomic, copy) dispatch_block_t endGameCallback;
 @property (nonatomic) BOOL easyMode;
 

@@ -42,12 +42,29 @@
     [UIView animateWithDuration:8 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         self.textView.center = CGPointMake(self.size.width / 2, 0 - (self.size.height / 2));
     }                completion:^(BOOL finished) {
+        if (finished) {
+            [self endScene];
+        }
+    }];
+
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endScene)];
+    [self.view addGestureRecognizer:self.tapGesture];
+}
+
+- (void)endScene {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.textView.alpha = 0;
+    }                completion:^(BOOL finished) {
+        [self.textView.layer removeAllAnimations];
         self.sceneEndCallback();
     }];
 }
 
 - (void)willMoveFromView:(SKView *)view {
     [super willMoveFromView:view];
+    [self.view removeGestureRecognizer:self.tapGesture];
+    self.tapGesture = nil;
+
     [self.slantedView removeFromSuperview];
     self.slantedView = nil;
     self.textView = nil;
