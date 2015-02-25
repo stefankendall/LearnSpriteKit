@@ -17,6 +17,7 @@
 		5459036E964342239340D40E /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54590007B204BE22ACCAD56E /* MenuViewController.m */; };
 		545903F4D891B014C0F095C8 /* StarField.m in Sources */ = {isa = PBXBuildFile; fileRef = 545908EA68A012F7525310C6 /* StarField.m */; };
 		5459046C902E5DE3CD573680 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 54590FFCDE166BA6C1C777F6 /* main.m */; };
+		545904B85E9C5179F2E1AAF9 /* HudNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 54590407CA297E6C8F4AFA90 /* HudNode.m */; };
 		545904E3A06B985E393BBF0F /* SKEmitterNode+RCWExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 54590D13D5787EA202DBED78 /* SKEmitterNode+RCWExtensions.m */; };
 		5459055CE422D7FD8A1F19A2 /* asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 54590CF0E5F501BF608B0768 /* asteroid.png */; };
 		54590734A0B37A2B3FE6A56A /* shipExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = 545908B75CB3EF1FC37B7D59 /* shipExplode.sks */; };
@@ -57,6 +58,7 @@
 		5459028A644B03214A7BB7CB /* OpeningScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeningScene.h; sourceTree = "<group>"; };
 		5459029D6FF71AA31E74252E /* powerup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = powerup.png; sourceTree = "<group>"; };
 		545902BB2A55C7AE2C89ABAE /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		54590407CA297E6C8F4AFA90 /* HudNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudNode.m; sourceTree = "<group>"; };
 		54590416403065CD8AFD9CE9 /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
 		545904929618EDC3E024206D /* GameOverNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverNode.m; sourceTree = "<group>"; };
 		54590535B69EB844A44DFBAB /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 		54590CF0E5F501BF608B0768 /* asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroid.png; sourceTree = "<group>"; };
 		54590D13D5787EA202DBED78 /* SKEmitterNode+RCWExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKEmitterNode+RCWExtensions.m"; sourceTree = "<group>"; };
 		54590DFFBC7BDEA244A32452 /* SpaceRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54590E118BEF9730A7CBFBC1 /* HudNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudNode.h; sourceTree = "<group>"; };
 		54590E41CA425ADB49BB3B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		54590E4684FB2DF3D90CD5E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		54590EB313BC9273DEFD4439 /* SpaceRunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceRunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +179,8 @@
 				5459028A644B03214A7BB7CB /* OpeningScene.h */,
 				545904929618EDC3E024206D /* GameOverNode.m */,
 				54590F54E1284E5AB08C483E /* GameOverNode.h */,
+				54590407CA297E6C8F4AFA90 /* HudNode.m */,
+				54590E118BEF9730A7CBFBC1 /* HudNode.h */,
 			);
 			path = SpaceRun;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				5459036E964342239340D40E /* MenuViewController.m in Sources */,
 				54590BC921A5DC8BFFDBB682 /* OpeningScene.m in Sources */,
 				54590358B6D6CC559D00BD8F /* GameOverNode.m in Sources */,
+				545904B85E9C5179F2E1AAF9 /* HudNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

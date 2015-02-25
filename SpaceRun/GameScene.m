@@ -3,8 +3,11 @@
 #import "StarField.h"
 #import "SKEmitterNode+RCWExtensions.h"
 #import "GameOverNode.h"
+#import "HudNode.h"
 
 @implementation GameScene
+
+
 
 - (void)didMoveToView:(SKView *)view {
     self.backgroundColor = [SKColor blackColor];
@@ -23,12 +26,19 @@
 
     self.shipFireRate = 0.5;
 
-    self.shootSound = [SKAction playSoundFileNamed:@"shoot.m4a" waitForCompletion:NO];
-    self.obstacleExplodeSound = [SKAction playSoundFileNamed:@"obstacleExplode.m4a" waitForCompletion:NO];
-    self.shipExplodeSound = [SKAction playSoundFileNamed:@"shipExplode.m4a" waitForCompletion:NO];
+//    self.shootSound = [SKAction playSoundFileNamed:@"shoot.m4a" waitForCompletion:NO];
+//    self.obstacleExplodeSound = [SKAction playSoundFileNamed:@"obstacleExplode.m4a" waitForCompletion:NO];
+//    self.shipExplodeSound = [SKAction playSoundFileNamed:@"shipExplode.m4a" waitForCompletion:NO];
 
     StarField *starField = [StarField node];
     [self addChild:starField];
+
+    HudNode *hudNode = [HudNode node];
+    hudNode.name = @"hud";
+    hudNode.zPosition = 100;
+    hudNode.position = CGPointMake(self.size.width/2, self.size.height/2);
+    [self addChild:hudNode];
+    [hudNode layoutForScene];
 }
 
 - (void)willMoveFromView:(SKView *)view {
