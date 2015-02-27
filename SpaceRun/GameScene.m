@@ -26,9 +26,9 @@
 
     self.shipFireRate = 0.5;
 
-//    self.shootSound = [SKAction playSoundFileNamed:@"shoot.m4a" waitForCompletion:NO];
-//    self.obstacleExplodeSound = [SKAction playSoundFileNamed:@"obstacleExplode.m4a" waitForCompletion:NO];
-//    self.shipExplodeSound = [SKAction playSoundFileNamed:@"shipExplode.m4a" waitForCompletion:NO];
+    self.shootSound = [SKAction playSoundFileNamed:@"shoot.m4a" waitForCompletion:NO];
+    self.obstacleExplodeSound = [SKAction playSoundFileNamed:@"obstacleExplode.m4a" waitForCompletion:NO];
+    self.shipExplodeSound = [SKAction playSoundFileNamed:@"shipExplode.m4a" waitForCompletion:NO];
 
     StarField *starField = [StarField node];
     [self addChild:starField];
@@ -39,6 +39,7 @@
     hudNode.position = CGPointMake(self.size.width/2, self.size.height/2);
     [self addChild:hudNode];
     [hudNode layoutForScene];
+    [hudNode startGame];
 }
 
 - (void)willMoveFromView:(SKView *)view {
@@ -106,6 +107,8 @@
             [self addChild:explosion];
 
             [self endGame];
+            HudNode *hud = (HudNode *) [self childNodeWithName:@"hud"];
+            [hud endGame];
         }
 
         [self enumerateChildNodesWithName:@"photon" usingBlock:^(SKNode *photon, BOOL *stop) {
@@ -259,7 +262,7 @@
     SKAction *remove = [SKAction removeFromParent];
     SKAction *fireAndRemove = [SKAction sequence:@[fly, remove]];
     [photon runAction:fireAndRemove];
-    [self runAction:self.shootSound];
+//    [self runAction:self.shootSound];
 }
 
 - (void)moveShipTowardPoint:(CGPoint)point byTimeDelta:(NSTimeInterval)timeDelta {

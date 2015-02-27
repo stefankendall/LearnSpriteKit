@@ -4,6 +4,18 @@
 
 @interface HudNode : SKNode
 
-- (void) layoutForScene;
+- (void)layoutForScene;
+
+- (void)addPoints:(NSInteger)points;
+
+- (void)startGame;
+
+- (void)endGame;
+
+@property(nonatomic) NSTimeInterval elapsedTime;
+@property(nonatomic) NSInteger score;
+
+@property(nonatomic, strong) NSNumberFormatter *scoreFormatter;
+@property(nonatomic, strong) NSNumberFormatter *timeFormatter;
 
 @end

@@ -48,6 +48,14 @@
         elapsedValue.position = CGPointMake(0, -4);
         [elapsedGroup addChild:elapsedValue];
         [self addChild:elapsedGroup];
+
+        self.scoreFormatter = [NSNumberFormatter new];
+        self.scoreFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+
+        self.timeFormatter = [NSNumberFormatter new];
+        self.timeFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        self.timeFormatter.minimumFractionDigits = 1;
+        self.timeFormatter.maximumFractionDigits = 1;
     }
 
     return self;
@@ -61,6 +69,37 @@
     SKNode *elapsedGroup = [self childNodeWithName:@"elapsedGroup"];
     groupSize = [elapsedGroup calculateAccumulatedFrame].size;
     elapsedGroup.position = CGPointMake(sceneSize.width / 2 - 20, sceneSize.height / 2 - groupSize.height);
+}
+
+- (void)addPoints:(NSInteger)points {
+    self.score += points;
+    SKLabelNode *scoreValue = (SKLabelNode *) [self childNodeWithName:@"scoreGroup/scoreValue"];
+    scoreValue.text = [NSString stringWithFormat:@"%@", [self.scoreFormatter stringFromNumber:@(self.score)]];
+    SKAction *scale = [SKAction scaleTo:1.1 duration:0.02];
+    SKAction *shrink = [SKAction scaleTo:1 duration:0.07];
+    SKAction *all = [SKAction sequence:@[scale, shrink]];
+    [scoreValue runAction:all];
+}
+
+- (void)startGame {
+    NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
+    SKLabelNode *elapsedValue = (SKLabelNode *) [self childNodeWithName:@"elapsedGroup/elapsedValue"];
+    __weak HudNode *weakSelf = self;
+    SKAction *update = [SKAction runBlock:^{
+        NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
+        NSTimeInterval elapsed = now - startTime;
+        weakSelf.elapsedTime = elapsed;
+        elapsedValue.text = [NSString stringWithFormat:@"%@s", [weakSelf.timeFormatter stringFromNumber: @(elapsed)]];
+    }];
+
+    SKAction *delay = [SKAction waitForDuration:0.05];
+    SKAction *updateAndDelay = [SKAction sequence:@[update, delay]];
+    SKAction *timer = [SKAction repeatActionForever:updateAndDelay];
+    [self runAction:timer withKey:@"elapsedGameTimer"];
+}
+
+- (void)endGame {
+    [self removeActionForKey:@"elapsedGameTimer"];
 }
 
 @end
