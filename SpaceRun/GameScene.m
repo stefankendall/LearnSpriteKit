@@ -7,8 +7,6 @@
 
 @implementation GameScene
 
-
-
 - (void)didMoveToView:(SKView *)view {
     self.backgroundColor = [SKColor blackColor];
     SKSpriteNode *ship = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship.png"];
@@ -122,6 +120,9 @@
                 [explosion rcw_dieOutInDuration:0.1];
                 [self addChild:explosion];
 
+                HudNode *hud = (HudNode *) [self childNodeWithName:@"hud"];
+                NSInteger score = 10 * hud.elapsedTime * self.easyMode ? 1 : 2;
+                [hud addPoints:score];
                 *stop = YES;
             }
         }];
