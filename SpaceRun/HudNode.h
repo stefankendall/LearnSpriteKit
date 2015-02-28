@@ -12,6 +12,9 @@
 
 - (void)endGame;
 
+- (void)
+showPowerupTimer:(NSTimeInterval) time;
+
 @property(nonatomic) NSTimeInterval elapsedTime;
 @property(nonatomic) NSInteger score;
 

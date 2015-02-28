@@ -25,6 +25,19 @@
     [self.view insertSubview:self.demoView atIndex:0];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    NSNumberFormatter *scoreFormatter = [[NSNumberFormatter alloc] init];
+    scoreFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults registerDefaults:@{@"highScore" : @0}];
+    NSNumber *score = [defaults valueForKey:@"highScore"];
+    NSString *scoreText = [scoreFormatter stringFromNumber:score];
+    self.highScoreLabel.text = scoreText;
+}
+
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.demoView removeFromSuperview];

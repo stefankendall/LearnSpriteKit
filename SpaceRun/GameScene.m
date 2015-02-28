@@ -89,6 +89,9 @@
             SKAction *waitAndPowerdown = [SKAction sequence:@[wait, powerdown]];
             [ship removeActionForKey:@"waitAndPowerdown"];
             [ship runAction:waitAndPowerdown withKey:@"waitAndPowerdown"];
+
+            HudNode *hud = (HudNode *) [self childNodeWithName:@"hud"];
+            [hud showPowerupTimer:5];
         }
     }];
 
@@ -105,8 +108,6 @@
             [self addChild:explosion];
 
             [self endGame];
-            HudNode *hud = (HudNode *) [self childNodeWithName:@"hud"];
-            [hud endGame];
         }
 
         [self enumerateChildNodesWithName:@"photon" usingBlock:^(SKNode *photon, BOOL *stop) {
@@ -135,6 +136,15 @@
     GameOverNode *node = [GameOverNode node];
     node.position = CGPointMake(self.size.width / 2, self.size.height / 2);
     [self addChild:node];
+
+    HudNode *hud = (HudNode *) [self childNodeWithName:@"hud"];
+    [hud endGame];
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *highScore = [defaults valueForKey:@"highScore"];
+    if(highScore.integerValue < hud.score){
+        [defaults setValue:@(hud.score) forKey:@"highScore"];
+    }
 }
 
 - (void)tapped {
@@ -143,7 +153,7 @@
 
 - (void)dropThing {
     u_int32_t dice = arc4random_uniform(100);
-    if (dice < 5) {
+    if (dice < 15) {
         [self dropPowerUp];
     }
     else if (dice < 20) {

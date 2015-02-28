@@ -59,22 +59,39 @@
                                     <segue destination="LVB-YS-i5n" kind="push" id="r5I-4A-hUL"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High Score:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fM3-ml-DGN">
+                                <rect key="frame" x="115" y="101" width="90" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VI1-jL-Je5">
+                                <rect key="frame" x="135" y="129" width="51" height="33"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-HeavyItalic" family="Avenir Next" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="WDF-FC-sp2" firstAttribute="centerX" secondItem="KkN-OK-jkD" secondAttribute="centerX" id="Irm-k6-xwE"/>
+                            <constraint firstItem="fM3-ml-DGN" firstAttribute="top" secondItem="WDF-FC-sp2" secondAttribute="bottom" constant="8" id="JDD-Bp-2em"/>
                             <constraint firstItem="WDF-FC-sp2" firstAttribute="top" secondItem="4kO-Gh-JID" secondAttribute="bottom" constant="52" id="UIt-lg-bgS"/>
                             <constraint firstAttribute="trailing" secondItem="KkN-OK-jkD" secondAttribute="trailing" constant="20" symbolic="YES" id="VjU-rX-7Rm"/>
                             <constraint firstAttribute="centerX" secondItem="QYs-WQ-Gnb" secondAttribute="centerX" constant="-11.5" id="YN7-eK-Rim"/>
+                            <constraint firstAttribute="centerX" secondItem="VI1-jL-Je5" secondAttribute="centerX" constant="-0.5" id="fcA-lF-tRb"/>
                             <constraint firstItem="KkN-OK-jkD" firstAttribute="top" secondItem="ueo-AB-XPl" secondAttribute="top" constant="234" id="itT-4C-uS9"/>
                             <constraint firstItem="TUd-Hw-bXd" firstAttribute="top" secondItem="QYs-WQ-Gnb" secondAttribute="bottom" constant="55" id="mWn-DZ-Nob"/>
                             <constraint firstItem="WDF-FC-sp2" firstAttribute="leading" secondItem="ueo-AB-XPl" secondAttribute="leading" constant="39" id="nqT-en-DGh"/>
                             <constraint firstItem="KkN-OK-jkD" firstAttribute="leading" secondItem="ueo-AB-XPl" secondAttribute="leading" constant="20" symbolic="YES" id="rAE-Vf-EKP"/>
+                            <constraint firstItem="VI1-jL-Je5" firstAttribute="top" secondItem="fM3-ml-DGN" secondAttribute="bottom" constant="7.5" id="vcN-8D-RkP"/>
+                            <constraint firstAttribute="centerX" secondItem="fM3-ml-DGN" secondAttribute="centerX" id="w1N-Lr-tL1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RhF-2X-1SF"/>
                     <connections>
                         <outlet property="difficultyChooser" destination="KkN-OK-jkD" id="pgd-tx-7eX"/>
+                        <outlet property="highScoreLabel" destination="VI1-jL-Je5" id="FV6-NA-iAe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nWc-wm-WB4" userLabel="First Responder" sceneMemberID="firstResponder"/>

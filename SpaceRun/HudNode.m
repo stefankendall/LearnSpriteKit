@@ -49,6 +49,35 @@
         [elapsedGroup addChild:elapsedValue];
         [self addChild:elapsedGroup];
 
+        SKNode *powerupGroup = [SKNode node];
+        powerupGroup.name = @"powerupGroup";
+
+        SKLabelNode *powerupTitle = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-Bold"];
+        powerupTitle.fontSize = 14;
+        powerupTitle.fontColor = [SKColor redColor];
+        powerupTitle.verticalAlignmentMode = SKLabelVerticalAlignmentModeBottom;
+        powerupTitle.text = @"Power-up!";
+        powerupTitle.position = CGPointMake(0, 4);
+
+        SKAction *scaleUp = [SKAction scaleTo:1.3 duration:0.3];
+        SKAction *scaleDown = [SKAction scaleTo:1 duration:0.3];
+        SKAction *pulse = [SKAction sequence:@[scaleUp, scaleDown]];
+        SKAction *pulseForever = [SKAction repeatActionForever:pulse];
+        [powerupTitle runAction:pulseForever];
+
+        [powerupGroup addChild:powerupTitle];
+
+        SKLabelNode *powerupValue = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-Bold"];
+        powerupValue.fontSize = 20;
+        powerupValue.fontColor = [SKColor redColor];
+        powerupValue.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
+        powerupValue.name = @"powerupValue";
+        powerupValue.text = @"0s left";
+        powerupValue.position = CGPointMake(0, -4);
+        [powerupGroup addChild:powerupValue];
+        [self addChild:powerupGroup];
+        powerupGroup.alpha = 0;
+
         self.scoreFormatter = [NSNumberFormatter new];
         self.scoreFormatter.numberStyle = NSNumberFormatterDecimalStyle;
 
@@ -65,10 +94,15 @@
     CGSize sceneSize = self.scene.size;
     SKNode *scoreGroup = [self childNodeWithName:@"scoreGroup"];
     CGSize groupSize = [scoreGroup calculateAccumulatedFrame].size;
-    scoreGroup.position = CGPointMake(0 - sceneSize.width / 2 + 20, sceneSize.height / 2 - groupSize.height);
+    CGFloat allGroupsYPosition = sceneSize.height / 2 - groupSize.height;
+    scoreGroup.position = CGPointMake(0 - sceneSize.width / 2 + 20, allGroupsYPosition);
     SKNode *elapsedGroup = [self childNodeWithName:@"elapsedGroup"];
     groupSize = [elapsedGroup calculateAccumulatedFrame].size;
-    elapsedGroup.position = CGPointMake(sceneSize.width / 2 - 20, sceneSize.height / 2 - groupSize.height);
+    elapsedGroup.position = CGPointMake(sceneSize.width / 2 - 20, allGroupsYPosition);
+
+    SKNode *powerupGroup = [self childNodeWithName:@"powerupGroup"];
+    groupSize = [powerupGroup calculateAccumulatedFrame].size;
+    powerupGroup.position = CGPointMake(0, allGroupsYPosition);
 }
 
 - (void)addPoints:(NSInteger)points {
@@ -89,7 +123,7 @@
         NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
         NSTimeInterval elapsed = now - startTime;
         weakSelf.elapsedTime = elapsed;
-        elapsedValue.text = [NSString stringWithFormat:@"%@s", [weakSelf.timeFormatter stringFromNumber: @(elapsed)]];
+        elapsedValue.text = [NSString stringWithFormat:@"%@s", [weakSelf.timeFormatter stringFromNumber:@(elapsed)]];
     }];
 
     SKAction *delay = [SKAction waitForDuration:0.05];
@@ -100,6 +134,43 @@
 
 - (void)endGame {
     [self removeActionForKey:@"elapsedGameTimer"];
+
+    SKNode *powerupGroup = [self childNodeWithName:@"powerupGroup"];
+    [powerupGroup removeActionForKey:@"showPowerupTimer"];
+
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:0.3];
+    [powerupGroup runAction:fadeOut];
+}
+
+- (void)showPowerupTimer:(NSTimeInterval)time {
+    SKNode *powerupGroup = [self childNodeWithName:@"powerupGroup"];
+    SKLabelNode *powerupValue = (SKLabelNode *) [powerupGroup childNodeWithName:@"powerupValue"];
+    [powerupGroup removeActionForKey:@"showPowerupTimer"];
+
+    NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
+    __weak HudNode *weakSelf = self;
+    SKAction *block = [SKAction runBlock:^{
+        NSTimeInterval elapsed = [NSDate timeIntervalSinceReferenceDate] - start;
+        NSTimeInterval left = time - elapsed;
+        if (left < 0) {
+            left = 0;
+        }
+
+        powerupValue.text = [NSString stringWithFormat:@"%@s left", [weakSelf.timeFormatter stringFromNumber:@(left)]];
+    }];
+
+    SKAction *blockPause = [SKAction waitForDuration:0.05];
+    SKAction *countdownSequence = [SKAction sequence:@[block, blockPause]];
+    SKAction *countdown = [SKAction repeatActionForever:countdownSequence];
+    SKAction *fadeIn = [SKAction fadeAlphaTo:1 duration:0.1];
+    SKAction *wait = [SKAction waitForDuration:time];
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:1];
+    SKAction *stopAction = [SKAction runBlock:^{
+        [powerupGroup removeActionForKey:@"showPowerupTimer"];
+    }];
+
+    SKAction *visuals = [SKAction sequence:@[fadeIn, wait, fadeOut, stopAction]];
+    [powerupGroup runAction:[SKAction group:@[countdown, visuals]] withKey:@"showPowerupTimer"];
 }
 
 @end
